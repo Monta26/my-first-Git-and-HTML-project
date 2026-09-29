@@ -77,19 +77,20 @@
         }    
 
        h1{
+        margin-top:0;
         text-align: center;
         font-style: normal;
         font-size:80px;
-        font-weight: 800;
+        font-weight: 400;
         text-shadow: 2px 2px 8px black;
+        margin-bottom: 8px;
        }
 
        h2{
         text-align: center;
-        font-family: puffin-arcade-level, sans-serif;
         font-style: normal;
         font-weight: 800;
-
+        font-size:20px;
        }
 
        h1, h2 ,h3 ,h4 ,h5 ,h6{
@@ -100,17 +101,29 @@
         color:rgb(253, 253, 253);
         text-align: center;
         text-decoration:solid;
-        font-size:20px;
         text-shadow: 2px 2px 8px black;
         font-weight: 20;
        }
-
-
 
        hr{
         border: none;
         border-top:2px dashed rgb(16, 18, 91);
        }
+
+       .card {
+        background-color: rgba(13, 148, 189, 0.6);
+        padding: 20px;
+        border-radius: 15px;
+        width: 150px;
+        height: 280px;
+        }
+
+        .film-container {
+        display: flex;
+        flex-wrap:wrap;
+        gap: 20px;
+        justify-content: center;
+        }
 
     </style>
 
@@ -132,7 +145,57 @@
 
     <section id="hero">
         <h1>Studio Ghibli</h1>
-        <p>Where imagination becomes animation.</p>
+        <h2>Where imagination becomes animation.</h3>
+        <h2>Step into a world of unforgetable stories,
+            beautiful landskapes and extraordinary characters.
+        </h2>
+
+
+        <div class="film-container">  
+            <div class="card">
+                <img src="Spirited Away.jpg" 
+                alt="Spirited Away"
+                width:="150"
+                height="150"
+                >
+                <h3>Spirited Away</h3>
+                <p>Released in 2001. Won the Academy Award 
+                for best animated feature.</p>
+            </div>
+            <div class="card">
+                <img src="My Neighbor Totoro.jpg" 
+                alt="My Neighbor Totoro"
+                width:="150"
+                height="150"
+                >
+                <h3>My Neighbor Totoro</h3>
+                <p>Release in 1988. Won Kinema Junpo Award 
+                for Best Film in 1988</p>
+            </div>
+
+            <div class="card">
+                <img src="Princess Mononoke.jpg" 
+                alt="My Neighbor Totoro"
+                width:="150"
+                height="150"
+                >
+                <h3>Princess Mononoke</h3>
+                <p>Release in 1997. Historical 
+                    fantasy film written and directed by 
+                    Hayao Miyazaki</p>
+            </div>
+            <div class="card">
+                <img src="Howl's Moving Castle.jpg" 
+                alt="My Neighbor Totoro"
+                width:="150"
+                height="150"
+                >
+                <h3>Princess Mononoke</h3>
+                <p>Release in 2004. Historical 
+                    fantasy film written and directed by 
+                    Hayao Miyazaki</p>
+            </div>
+        </div>
     </section>
     
 
