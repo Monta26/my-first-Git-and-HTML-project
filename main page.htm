@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset=""UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A website about studio ghibli animations">
     <title>Studio Ghibli Animation</title>
@@ -28,6 +28,10 @@
                 }
         #navbar a:hover {
                     background: #3a6c45
+        }
+
+        .active{
+            background:#3a6c45;
         }
 
         #navbar i{
@@ -69,7 +73,12 @@
             align-items:center;
             justify-content: center;
             min-height: 100vh;
-            background-image: url("ghibli bachground.jpg");
+            background: 
+                linear-gradient(
+                    rgba(0,0,0,0.5),
+                    rgba(0,0,0,0.2)
+                ),
+                url("ghibli bachground.jpg");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -80,7 +89,7 @@
         margin-top:0;
         text-align: center;
         font-style: normal;
-        font-size:80px;
+        font-size:clamp(3rem, 8vw, 8rem);
         font-weight: 400;
         text-shadow: 2px 2px 8px black;
         margin-bottom: 8px;
@@ -111,18 +120,108 @@
        }
 
        .card {
-        background-color: rgba(42, 69, 23, 0.6);
-        padding: 20px;
-        border-radius: 15px;
-        width: 150px;
-        height: 290px;
+            background-color: rgba(45, 68, 27, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            width: 150px;
+            height: 300px;
+            transition: 0.3s;
+        }
+
+        .card:hover{
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+
+        .card img{
+            width: 100%;
+            aspect-ratio:1 / 1;
+            object-fit: cover;
+        }
+
+        .card-link{
+            text-decoration: none;
+            color: inherit;
+
         }
 
         .film-container {
-        display: flex;
-        flex-wrap:wrap;
-        gap: 20px;
-        justify-content: center;
+            flex:1;
+            display: flex;
+            flex-wrap:nowrap;
+            gap: 20px;
+            justify-content: flex-start;
+            overflow-x:auto;
+            overflow-y: hidden;
+            scrollbar-width: none;
+        }
+        .film-container::-webkit-scrollbar{
+            display: none;
+        }
+        .film-wrapper{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            width:100%;
+        }
+
+        .arrow {
+            background:none;
+            border:none;
+            font-size: 40px;
+            transition: 0.3s;
+            color:white;
+            cursor: pointer;
+            flex-shrink:0;
+        }
+
+        .arrow:hover{
+            color: #068BBF;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            #hero{
+                background:
+                    linear-gradient(
+                        rgba(0,0,0,0.5),
+                        rgba(0,0,0,0.3)
+                    ),
+                    url("ghibli bachground-mobile.jpg");
+                background-size:cover;
+                background-position:center;
+            }
+            #navbar {
+                flex-wrap: wrap;
+                justify-content:center;
+            }
+            #search-box,
+            #search-input{
+                width:100%;
+                max-width:300px;
+                margin:10px 0;
+            }
+            .card {
+                width: 90%;
+                max-width: 300px;
+                height:auto;
+            }
+            .film-wrapper{
+                flex-direction:column;
+            }
+            .film-container{
+                flex-wrap:wrap;
+                overflow:visible;
+                justify-content:center;
+            }
+            .arrow{
+                display:none;
+            }
+
         }
 
     </style>
@@ -132,11 +231,11 @@
 <body>
     
     <div id="navbar">
-        <a href="main page.htm"><i class ="fa-solid fa-house"></i>Home</a>
-        <a href="#films"><i class="fa-solid fa-film"></i>Films</a>
-        <a href="#directors"><i class="fa-solid fa-clapperboard"></i>Directors</a>
+        <a href="main page.htm" class="active"><i class ="fa-solid fa-house"></i>Home</a>
+        <a href="Films page.htm"><i class="fa-solid fa-film"></i>Films</a>
+        <a href="Directors page.htm"><i class="fa-solid fa-clapperboard"></i>Directors</a>
         <a href="About page.htm"><i class="fa-solid fa-circle-info"></i>About</a>
-        <a href="#gallery"><i class="fa-solid fa-images"></i>Gallery</a>
+        <a href="Gallery.htm"><i class="fa-solid fa-images"></i>Gallery</a>
         <div id="search-box">
             <i class="fa-solid fa-magnifying-glass"></i>
             <input type="text" placeholder="      Search..."id="search-input">
@@ -150,61 +249,118 @@
             beautiful landskapes and extraordinary characters.
         </h2>
 
+        <div class="film-wrapper">
+            <button class="arrow" id="left-arrow"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="film-container" id="film-container">  
+                <a href="Films page.htm#spirited-away" class="card-link">
+                <div class="card">
+                    <img src="Spirited Away.jpg" 
+                    alt="Spirited Away">
 
-        <div class="film-container">  
-            <div class="card">
-                <img src="Spirited Away.jpg" 
-                alt="Spirited Away"
-                width:="150"
-                height="150"
-                >
-                <h3>Spirited Away</h3>
-                <p>Released in 2001. Won the Academy Award 
-                for best animated feature.</p>
+                    <h3>Spirited Away</h3>
+                    <p>Released in 2001. Won the Academy Award 
+                        for best animated feature.</p>
+                </div>
+                </a>
+                <a href="Films page.htm#my-neighbor-totoro" class="card-link">
+                <div class="card">
+                    <img src="My Neighbor Totoro.jpg" 
+                    alt="My Neighbor Totoro">
+                    <h3>My Neighbor Totoro</h3>
+                    <p>Release in 1988. Won Kinema Junpo Award 
+                        for Best Film in 1988</p>
+                </div>
+                </a>
+                <a href="Films page.htm#princess-mononoke" class="card-link">
+                <div class="card">
+                    <img src="Princess Mononoke.jpg" 
+                    alt="My Neighbor Totoro">
+                    <h3>Princess Mononoke</h3>
+                    <p>Release in 1997. Historical 
+                        fantasy film written and directed by 
+                        Hayao Miyazaki</p>
+                </div>
+                </a>
+                <a href="Films page.htm#howls-moving-castle" class="card-link">
+                <div class="card">
+                    <img src="Howl's Moving Castle.jpg" 
+                    alt="Howl's Moving Castle">
+                    <h3>Howl's Moving Castle</h3>
+                    <p>Release in 2004. based on Diana Wynne Jones' 1986 novel. </p>
+                </div>
+                </a>
+                <a href="Films page.htm#kikis-delivery-service" class="card-link">
+                <div class="card">
+                    <img src="Kiki’s Delivery Service.jpg" 
+                    alt="Kikis Delivery Service">
+                    <h3>Kiki’s Delivery Service</h3>
+                    <p>Release in 1989. based on Eiko Kadono's 1985 novel. </p>
+                </div>
+                </a>
+                <a href="Films page.htm#ponyo" class="card-link">
+                <div class="card">
+                    <img src="Ponyo.jpg" 
+                    alt="Ponyo">
+                    <h3>Ponyo</h3>
+                    <p>Release in 2008. magical goldfish, who longs to become human. </p>
+                </div>
+                </a>
+                <a href="Films page.htm#castle-in-the-sky" class="card-link">
+                <div class="card">
+                    <img src="Castle in the Sky.jpg" 
+                    alt="Castle in the Sky">
+                    <h3>Castle in the Sky</h3>
+                    <p>Release in 1986. First film produced by Studio Ghibli.</p>
+                </div>
+                </a>
+                <a href="Films page.htm#the-wind-rises" class="card-link">
+                <div class="card">
+                    <img src="The wind rises.jpg" 
+                    alt="The wind rises">
+                    <h3>The wind rises</h3>
+                    <p>Release in 2013. Fictionalised bigraphy of an aircraft engineer.</p>
+                </div>
+                </a>
+                <a href="Films page.htm#Nausicaä" class="card-link">
+                <div class="card">
+                    <img src="Nausicaä.jpg" 
+                    alt="Nausicaä of the Valley of the Wind">
+                    <h3>Nausicaä of the Valley of the Wind</h3>
+                    <p>Release in 1984. A fantasy adventure film that follows the story of Nausicaä.</p>
+                </div>
+                </a>
+                <a href="Films page.htm#arrietty" class="card-link">
+                <div class="card">
+                    <img src="Arrietty.jpg" 
+                    alt="Arrietty">
+                    <h3>Arrietty</h3>
+                    <p>Release in 2010. Young Borrower who befriends a human boy, exploring themes of 
+                        friendship and survival.</p>
+                </div>
+                </a>
             </div>
-            <div class="card">
-                <img src="My Neighbor Totoro.jpg" 
-                alt="My Neighbor Totoro"
-                width:="150"
-                height="150"
-                >
-                <h3>My Neighbor Totoro</h3>
-                <p>Release in 1988. Won Kinema Junpo Award 
-                for Best Film in 1988</p>
-            </div>
-
-            <div class="card">
-                <img src="Princess Mononoke.jpg" 
-                alt="My Neighbor Totoro"
-                width:="150"
-                height="150"
-                >
-                <h3>Princess Mononoke</h3>
-                <p>Release in 1997. Historical 
-                    fantasy film written and directed by 
-                    Hayao Miyazaki</p>
-            </div>
-            <div class="card">
-                <img src="Howl's Moving Castle.jpg" 
-                alt="My Neighbor Totoro"
-                width:="150"
-                height="150"
-                >
-                <h3>Princess Mononoke</h3>
-                <p>Release in 2004. based on Diana Wynne Jones' 1986 novel. </p>
-            </div>
-            <div class="card">
-                <img src="Kiki’s Delivery Service.jpg" 
-                alt="Kiki’s Delivery Service"
-                width:="150"
-                height="150"
-                >
-                <h3>Kiki’s Delivery Service</h3>
-                <p>Release in 1989. based on Eiko Kadono's 1985 novel. </p>
-            </div>
+            <button class="arrow" id="right-arrow"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
     </section>
     
+    <script>
 
+    const container = document.getElementById("film-container");
+
+    document.getElementById("left-arrow").onclick = function() {
+        container.scrollBy({
+        left: -400,
+        behavior: "smooth"
+        });
+    };
+
+    document.getElementById("right-arrow").onclick = function() {
+        container.scrollBy({
+        left: 400,
+        behavior: "smooth"
+        });
+    };
+
+    </script>
 </body>
 </html>
