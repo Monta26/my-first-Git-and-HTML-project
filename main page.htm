@@ -6,28 +6,40 @@
     <meta name="description" content="A website about studio ghibli animations">
     <title>Studio Ghibli Animation</title>
     <link rel="stylesheet" href ="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+    <script
+        src="https://unpkg.com/vue@3/dist/vue.global.js"
+        ></script>
     <style>
         body{
             margin: 0;
             padding: 0;
         }
+        :root{
+            --dark-green: #17391c;
+            --light-green: #3a6c45;
+            --dark-blue:#0F172A;
+            --light-blue: #068BBF;
+            --white: #f5f5f5;
+            --grey: #808080;
+            --text-shadow: 2px 2px 8px black;
+        }
+
         #navbar{
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                background: #17391c;
+                background: var(--dark-green);
                 gap:1px;
                 padding: 5px;
             }            
         #navbar a {
                     text-align: center;
-                    color: #f5f5f5;
+                    color: var(--white);
                     text-decoration: none;
                     padding: 15px;
                 }
         #navbar a:hover {
-                    background: #3a6c45
+                    background:var(--light-green)
         }
 
         .active{
@@ -56,7 +68,7 @@
             left:20px;
             top:50%;
             transform: translateY(-50%);
-            color:grey;
+            color: var(--grey);
         }
 
         #search-input {
@@ -91,7 +103,7 @@
         font-style: normal;
         font-size:clamp(3rem, 8vw, 8rem);
         font-weight: 400;
-        text-shadow: 2px 2px 8px black;
+        text-shadow:var(--text-shadow);
         margin-bottom: 8px;
        }
 
@@ -110,17 +122,17 @@
         color:rgb(253, 253, 253);
         text-align: center;
         text-decoration:solid;
-        text-shadow: 2px 2px 8px black;
+        text-shadow: var(--text-shadow);
         font-weight: 20;
        }
 
        hr{
         border: none;
-        border-top:2px dashed rgb(16, 18, 91);
+        border-top:2px dashed var(--dark-blue);
        }
 
        .card {
-            background-color: rgba(45, 68, 27, 0.8);
+            background-color: rgba(58, 108, 69, 0.7);
             padding: 20px;
             border-radius: 15px;
             width: 150px;
@@ -238,7 +250,7 @@
         <a href="Gallery.htm"><i class="fa-solid fa-images"></i>Gallery</a>
         <div id="search-box">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="      Search..."id="search-input">
+            <input type="text" placeholder="      Search..."id="search-input" v-model="searchTerm">
         </div>
     </div>
 
@@ -344,22 +356,48 @@
     </section>
     
     <script>
+        const { createApp } = Vue;
 
-    const container = document.getElementById("film-container");
+        createApp({
+            data() {
+                return {
+                    searchTerm: "",
 
-    document.getElementById("left-arrow").onclick = function() {
-        container.scrollBy({
-        left: -400,
-        behavior: "smooth"
-        });
-    };
+                    films: [
+                        { title: "Spirited Away", image: "Spirited Away.jpg" },
+                        { title: "My Neighbor Totoro", image: "My Neighbor Totoro.jpg" },
+                        { title: "Princess Mononoke", image: "Princess Mononoke.jpg" },
+                        { title: "Howl's Moving Castle", image: "Howl's Moving Castle.jpg" },
+                        { title: "Ponyo", image: "Ponyo.jpg" }
+                    ]
+                };
+            }
+        }).mount("#app");
+        computed: {
+            filteredFilms() {
+                return this.films.filter(film =>
+                    film.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+            );
+    }
+}
+    </script>
+    <script>
 
-    document.getElementById("right-arrow").onclick = function() {
-        container.scrollBy({
-        left: 400,
-        behavior: "smooth"
-        });
-    };
+        const container = document.getElementById("film-container");
+
+        document.getElementById("left-arrow").onclick = function() {
+            container.scrollBy({
+            left: -400,
+            behavior: "smooth"
+            });
+        };
+
+        document.getElementById("right-arrow").onclick = function() {
+            container.scrollBy({
+            left: 400,
+            behavior: "smooth"
+            });
+        };
 
     </script>
 </body>
