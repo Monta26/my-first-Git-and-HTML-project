@@ -7,43 +7,34 @@
     <title>Studio Ghibli Animation</title>
     <link rel="stylesheet" href ="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script
-        src="https://unpkg.com/vue@3/dist/vue.global.js"
-        ></script>
+        src="https://unpkg.com/vue@3/dist/vue.global.js">
+    </script>
     <style>
         body{
             margin: 0;
             padding: 0;
-        }
-        :root{
-            --dark-green: #17391c;
-            --light-green: #3a6c45;
-            --dark-blue:#0F172A;
-            --light-blue: #068BBF;
-            --white: #f5f5f5;
-            --grey: #808080;
-            --text-shadow: 2px 2px 8px black;
         }
 
         #navbar{
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                background: var(--dark-green);
+                background: #1a401d; 
                 gap:1px;
                 padding: 5px;
             }            
         #navbar a {
                     text-align: center;
-                    color: var(--white);
+                    color: #f2f2f2; ;
                     text-decoration: none;
                     padding: 15px;
                 }
         #navbar a:hover {
-                    background:var(--light-green)
+                    background:#3a6c45;
         }
 
         .active{
-            background:var(--light-green);
+            background:#3a6c45;
         }
 
         #navbar i{
@@ -79,6 +70,28 @@
             border-radius: 20px;
         }
 
+        .film-list{
+            position:absolute;
+            top: 50px;
+            right: 15px;
+            width:350px;
+            background: rgba(26, 64, 29, 0.702);
+            border-radius: 20px;
+            overflow: hidden; /*If the content doesn't fit, it can spill outside the box. with it anything that goes outside the box is cut off and hidden*/
+        }
+
+        .film-list a{
+            color: inherit;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            color: white;
+        }
+
+        .film-list a:hover{
+            background: rgba(58, 108, 69, 0.702);
+        }
+
         #hero {
             display:flex;
             flex-direction:column;
@@ -90,7 +103,7 @@
                     rgba(0,0,0,0.5),
                     rgba(0,0,0,0.2)
                 ),
-                url("ghibli bachground.jpg");
+                url("main-bachground.jpg");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -132,7 +145,7 @@
        }
 
        .card {
-            background-color: rgba(58, 108, 69, 0.7);
+            background-color: rgba(58, 108, 69, 0.702);
             padding: 20px;
             border-radius: 15px;
             width: 150px;
@@ -242,23 +255,34 @@
 
 <body>
     
-    <div id="navbar">
-        <a href="main page.htm" class="active"><i class ="fa-solid fa-house"></i>Home</a>
-        <a href="Films page.htm"><i class="fa-solid fa-film"></i>Films</a>
-        <a href="Directors page.htm"><i class="fa-solid fa-clapperboard"></i>Directors</a>
-        <a href="About page.htm"><i class="fa-solid fa-circle-info"></i>About</a>
-        <a href="Gallery.htm"><i class="fa-solid fa-images"></i>Gallery</a>
-        <div id="search-box">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="      Search..."id="search-input" v-model="searchTerm">
+    <div id="app">
+        <nav id="navbar">
+            <a href="main page.htm" class="active"><i class ="fa-solid fa-house"></i>Home</a>
+            <a href="Films page.htm"><i class="fa-solid fa-film"></i>Films</a>
+            <a href="Directors page.htm"><i class="fa-solid fa-clapperboard"></i>Directors</a>
+            <a href="About page.htm"><i class="fa-solid fa-circle-info"></i>About</a>
+            <a href="Gallery.htm"><i class="fa-solid fa-images"></i>Gallery</a>
+            <div id="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" 
+                    placeholder="      Search..." 
+                    id= "search-input" 
+                    v-model.trim="searchText"> <!--the trim .modifier automatically removes spaces from the beginning and end of what the user types-->
+            </div>
+        </nav>
+        <div class="film-list" v-if="searchText"> <!--v-if="searchText" for this, vue checks if the searchText is not empty, if it is not empty, it will show the list of films that match the searchText-->
+            <a v-for="film in filteredFilms"
+                :href="film.link">
+                {{film.name}}
+            </a>
         </div>
     </div>
 
     <section id="hero">
         <h1>Studio Ghibli</h1>
-        <h2>Where imagination becomes animation.</h3>
-        <h2>Step into a world of unforgetable stories,
-            beautiful landskapes and extraordinary characters.
+        <h2>Where Imagination Becomes Animation.</h3>
+        <h2>Step into a world of unforgettable stories,
+            beautiful landscapes and extraordinary characters.
         </h2>
 
         <div class="film-wrapper">
@@ -279,7 +303,7 @@
                     <img src="My Neighbor Totoro.jpg" 
                     alt="My Neighbor Totoro">
                     <h3>My Neighbor Totoro</h3>
-                    <p>Release in 1988. Won Kinema Junpo Award 
+                    <p>Released in 1988. Won Kinema Junpo Award 
                         for Best Film in 1988</p>
                 </div>
                 </a>
@@ -288,7 +312,7 @@
                     <img src="Princess Mononoke.jpg" 
                     alt="My Neighbor Totoro">
                     <h3>Princess Mononoke</h3>
-                    <p>Release in 1997. Historical 
+                    <p>Released in 1997. Historical 
                         fantasy film written and directed by 
                         Hayao Miyazaki</p>
                 </div>
@@ -298,7 +322,7 @@
                     <img src="Howl's Moving Castle.jpg" 
                     alt="Howl's Moving Castle">
                     <h3>Howl's Moving Castle</h3>
-                    <p>Release in 2004. based on Diana Wynne Jones' 1986 novel. </p>
+                    <p>Released in 2004. based on Diana Wynne Jones' 1986 novel. </p>
                 </div>
                 </a>
                 <a href="Films page.htm#kikis-delivery-service" class="card-link">
@@ -306,7 +330,7 @@
                     <img src="Kiki’s Delivery Service.jpg" 
                     alt="Kikis Delivery Service">
                     <h3>Kiki’s Delivery Service</h3>
-                    <p>Release in 1989. based on Eiko Kadono's 1985 novel. </p>
+                    <p>Released in 1989. based on Eiko Kadono's 1985 novel. </p>
                 </div>
                 </a>
                 <a href="Films page.htm#ponyo" class="card-link">
@@ -314,7 +338,7 @@
                     <img src="Ponyo.jpg" 
                     alt="Ponyo">
                     <h3>Ponyo</h3>
-                    <p>Release in 2008. magical goldfish, who longs to become human. </p>
+                    <p>Released in 2008. magical goldfish, who longs to become human. </p>
                 </div>
                 </a>
                 <a href="Films page.htm#castle-in-the-sky" class="card-link">
@@ -322,7 +346,7 @@
                     <img src="Castle in the Sky.jpg" 
                     alt="Castle in the Sky">
                     <h3>Castle in the Sky</h3>
-                    <p>Release in 1986. First film produced by Studio Ghibli.</p>
+                    <p>Released in 1986. First film produced by Studio Ghibli.</p>
                 </div>
                 </a>
                 <a href="Films page.htm#the-wind-rises" class="card-link">
@@ -330,7 +354,7 @@
                     <img src="The wind rises.jpg" 
                     alt="The wind rises">
                     <h3>The wind rises</h3>
-                    <p>Release in 2013. Fictionalised bigraphy of an aircraft engineer.</p>
+                    <p>Released in 2013. Fictionalised biography of an aircraft engineer.</p>
                 </div>
                 </a>
                 <a href="Films page.htm#Nausicaä" class="card-link">
@@ -338,7 +362,7 @@
                     <img src="Nausicaä.jpg" 
                     alt="Nausicaä of the Valley of the Wind">
                     <h3>Nausicaä of the Valley of the Wind</h3>
-                    <p>Release in 1984. A fantasy adventure film that follows the story of Nausicaä.</p>
+                    <p>Released in 1984. A fantasy adventure film that follows the story of Nausicaä.</p>
                 </div>
                 </a>
                 <a href="Films page.htm#arrietty" class="card-link">
@@ -346,7 +370,7 @@
                     <img src="Arrietty.jpg" 
                     alt="Arrietty">
                     <h3>Arrietty</h3>
-                    <p>Release in 2010. Young Borrower who befriends a human boy, exploring themes of 
+                    <p>Released in 2010. Young Borrower who befriends a human boy, exploring themes of 
                         friendship and survival.</p>
                 </div>
                 </a>
@@ -355,33 +379,68 @@
         </div>
     </section>
     
+    
     <script>
-        const { createApp } = Vue;
 
-        createApp({
-            data() {
-                return {
-                    searchTerm: "",
+        Vue.createApp({
+            data(){
+                return{
+                    searchText:"",
 
                     films: [
-                        { title: "Spirited Away", image: "Spirited Away.jpg" },
-                        { title: "My Neighbor Totoro", image: "My Neighbor Totoro.jpg" },
-                        { title: "Princess Mononoke", image: "Princess Mononoke.jpg" },
-                        { title: "Howl's Moving Castle", image: "Howl's Moving Castle.jpg" },
-                        { title: "Ponyo", image: "Ponyo.jpg" }
+                        { 
+                            name: "Spirited Away", 
+                            link: "Films page.htm#spirited-away"
+                        },
+                        {
+                            name:"My Neighbor Totoro",
+                            link:"Films page.htm#my-neighbor-totoro"
+                        },
+                        {
+                            name:"Princess Mononoke",
+                            link:"Films page.htm#princess-mononoke"
+                        },
+                        {
+                            name:"Howl's Moving Castle",
+                            link:"Films page.htm#howls-moving-castle"
+                        },
+                        {
+                            name:"Kiki’s Delivery Service",
+                            link:"Films page.htm#kikis-delivery-service"
+                        },
+                        {
+                            name:"Ponyo",
+                            link:"Films page.htm#ponyo"
+                        },
+                        {
+                            name:"Castle in the Sky",
+                            link:"Films page.htm#castle-in-the-sky"
+                        },
+                        {
+                            name:"The wind rises",
+                            link:"Films page.htm#the-wind-rises"
+                        },
+                        {
+                            name:"Nausicaä",
+                            link:"Films page.htm#Nausicaä"
+                        },
+                        {
+                            name:"Arrietty",
+                            link:"Films page.htm#arrietty"
+                        }
                     ]
-                };
+                }
+            },
+            computed: { //it creates a value based on other values
+                filteredFilms() { //function
+                    return this.films.filter( //this.films refers to the films array in my data and .filter, filters the data by the condision in the next line (keeps only the items that pass my tset)
+                        film => film.name.toLowerCase() //toLowerCase makes the search ignore the capital letters
+                        .includes(this.searchText.toLowerCase()
+                        )
+                    );
+                }
             }
-        }).mount("#app");
-        computed: {
-            filteredFilms() {
-                return this.films.filter(film =>
-                    film.title.toLowerCase().includes(this.searchTerm.toLowerCase())
-            );
-    }
-}
-    </script>
-    <script>
+        }).mount("#app")
 
         const container = document.getElementById("film-container");
 

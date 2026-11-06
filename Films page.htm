@@ -6,12 +6,15 @@
     <meta name="description" content="A website about studio ghibli animations">
     <title>Studio Ghibli Animation</title>
     <link rel="stylesheet" href ="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script 
+        scr="https://unpkg.com/vue@3/dist/vue.global.js">
+    </script>
 
     <style>
         body{
             margin: 0;
             padding: 0;
-            background-color: rgb(49, 64, 28);
+            background-color: rgb(23, 57, 28);
         }
         #navbar{
                 display: flex;
@@ -65,7 +68,96 @@
             border:none;
             border-radius: 20px;
         }
+        
+        .films-hero{
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            align-items:center;
+            justify-content:center;
+            min-height: 100vh;
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.5),
+                    rgba(0,0,0,0.2)
+                ),
+                url("film-hero.jpg");
+            background-size:cover;
+            background-position:center ;
+            background-repeat:no-repeat;
+            text-align:center;
+        }
 
+        /*fade effect*/
+        .films-hero::after{
+            content:"";
+            position:absolute;
+            left:0;
+            bottom:0;
+            width:100%;
+            height: 200px;
+            background:
+                linear-gradient(
+                    to bottom,
+                    transparent 0%,
+                    transparent 30%,
+                    rgb(23, 57, 28) 100%
+                );
+        }
+
+        .featured-film{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            width:85%;
+            margin: 100px auto;
+            border-radius:20px;
+            background-color:rgb(45, 93, 53);
+            box-shadow:0 10px 30px rgba(0,0,0,0.2);
+            overflow:hidden;
+        }
+
+        .featured-film img{
+            width:55%;
+            height: 700px;
+            object-fit: cover;
+            display: block;
+            border-radius:20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        .featured-content{
+            width: 45%;
+            padding: 60px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            color: white;
+        }
+        .featured-label{
+            color:rgb(212, 217, 200);
+            text-transform:uppercase;
+            letter-spacing:1px;
+            margin-bottom: 5px;
+            font-size: 15px;
+        }
+        .featured-content h2{
+            font-size: 50px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .featured-content p{
+            color:rgb(219, 228, 216);
+            line-height:1.8;
+            text-align: left;
+        }
+        .explore-btn{
+            background-color:#4f7d52;
+            color:white;
+            border:none;
+            padding: 10px 20px;
+            font-size: 20px;
+            border-radius:30px;
+        }
         h1{
         margin-top:0;
         text-align: center;
@@ -77,22 +169,28 @@
        }
 
        h2{
-        text-align: center;
-        font-style: normal;
-        font-weight: 800;
-        font-size:40px;
-       }
-
-       h1, h2 ,h3 ,h4 ,h5 ,h6{
-        color:rgb(253, 253, 253);
-       }
-
-       p{
         color:rgb(253, 253, 253);
         text-align: center;
         text-decoration:solid;
         text-shadow: 2px 2px 8px black;
         font-weight: 20;
+        font-size:25px;
+       }
+
+       h1, h2 ,h3 ,h4 ,h5 ,h6{
+        color:rgb(253, 253, 253);
+       }
+       h3 ,h4 ,h5 ,h6{
+        font-family: Arial, Helvetica, sans-serif;
+       }
+       p{
+        color:rgb(253, 253, 253);
+        text-align: center;
+        text-decoration:solid;
+        text-shadow: 2px 2px 8px black;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 20;
+        font-size: 20px;
        }
 
        hr{
@@ -101,6 +199,51 @@
         border-top:4px dotted;
        }
     
+    @media (max-width: 1400px) {
+        h1 {
+            font-size: 3rem;
+        }
+        .films-hero{
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.5),
+                    rgba(0,0,0,0.2)
+                ),
+                url("film-hero.jpg");
+                background-size:cover;
+                background-position:center;
+        }
+        .films-hero::after{
+            background:
+                linear-gradient(
+                    to bottom,
+                    transparent 0%,
+                    transparent 30%,
+                    rgb(23, 57, 28) 100%
+                );
+            }
+            #navbar {
+                flex-wrap: wrap;
+                justify-content:center;
+            }
+            #search-box,
+            #search-input{
+                width:100%;
+                max-width:300px;
+                margin:10px 0;
+            }
+            .featured-film {
+                flex-direction: column;
+            }
+            .featured-film img{
+                width:100%;
+                height:auto;
+            }
+
+            .featured-content{
+                width:100%;
+            }
+    }
     </style>
 </head>
 <body>
@@ -115,54 +258,130 @@
             <input type="text" placeholder="      Search..."id="search-input">
         </div>
     </div>
+    <section class="films-hero">
+        <p>The Film collection</p>
+        <h1> A world in every story</h1>
+        <p>From quiet country lanes to castles in the clouds. Find a film to get lost in.</p>
+    </section>
+    <section class="featured-film">
+        <img src="Arrietty (2).jpg" alt="Arrietty">
+        <div class="featured-content">
+            <p class="featured-label">in the spotlight</p>
+            <h2>Arrietty</h2>
+            <p class="featured-label">借りぐらしのアリエッティ · Karigurashi no Arrietti</p>
+            <p>2010  /  94 min  /  Fantasy · Adventure</p>
+            <P>
+                Hidden beneath the floorboards of an ordinary house,
+                a tiny borrower named Arrietty lives with her family in
+                secret. When an unexpected friendship forms with a human
+                boy, her quiet world begins to change forever.
+            </P>
+            <p class="featured-label">Directed by Hiromasa Yonebayashi</p>
+            <button class="explore-btn">Explore Film →</button>
+        </div>
+    </section>
+    <section class="films-grid">
 
-    <section id="spirited-away">
-        <h2>Spirited Away</h2>
-        <p>I don't know</p>
-    </section>
-    <hr>
-    <section id="my-neighbor-totoro">
-        <h2>My Neighbor Totoro</h2>
-        <p>something</p>
-    </section>
-    <hr>
-    <section id="princess-mononoke">
-        <h2>Princess Mononoke</h2>
-        <p>something</p>
-    </section>
-    <hr>
-    <section id="howls-moving-castle">
-        <h2>Howl's Moving Castle</h2>
-        <p>something</p>
-    </section>
-    <hr>
-    <section id="kikis-delivery-service">
-        <h2>Kiki's Delivery Service</h2>
-        <p>something</p>
-    </section>
-    <hr>
-    <section id="ponyo">
-        <h2>Ponyo</h2>
-        <p>something</p>
-    </section>
-    <hr>
-    <section id="castle-in-the-sky">
-        <h2>Castle in the Sky</h2>
-        <p>something</p>
-    </section>
-    <hr>
-    <section id="the-wind-rises">
-        <h2>The wind rises</h2>
-        <p>something</p>
-    </section>
-    <hr>
-    <section id="Nausicaä">
-        <h2>Nausicaä of the Valley of the Wind</h2>
-        <p>something</p>
-    </section>
-    <hr>
-    <section id="arrietty">
-        <h2>Arrietty</h2>
-        <p>something</p>
-    </section>
-    <hr>
+    
+    <script>
+        Vue.createApp({
+            data(){
+                return{
+                    selectedFilm:null,
+
+                    films: [
+                        {
+                            id:"my-neighbor-totoro",
+                            title: "My Neighbor Totoro",
+                            japanese:"となりのトトロ",
+                            year:1988,
+                            runtime:"86 min",
+                            genre:"Fantasy · Family",
+                            image:"My Neighbor Totoro.jpg",
+                            description: 
+                            "Two sisters move to the countryside and discover gentle forest spirits living nearby. Their adventures with Totoro fill their new home with wonder and imagination."
+                        },
+                        {
+                           id:"spirited-away",
+                           title:"Spirited Away",
+                           japanese:"千と千尋の神隠し",
+                           year:2001,
+                           runtime:"125 min",
+                           genre:"Fantasy · Adventure",
+                           image:"Spirited_Away.jpg",
+                           description:"After entering a mysterious spirit world, Chihiro must work in a magical bathhouse to save her parents and find her way home." 
+                        },
+                        {
+                            id:"howls-moving-castle",
+                            title:"Howl's Moving Castle",
+                            japanese:"ハウルの動く城",
+                            year:2004,
+                            runtime:"119 min",
+                            genre:"Fantasy · Romance",
+                            image:"Howls_Moving_Castle.jpg",
+                            description:"A young woman cursed by a witch finds refuge in a magical moving castle and embarks on a journey filled with love, magic, and adventure."
+                        },
+                        {
+                            id:"ponyo",
+                            title:"Ponyo",
+                            japanese:"崖の上のポニョ",
+                            year:2008,
+                            runtime:"101 min",
+                            genre:"Fantasy · Family",
+                            image:"Ponyo.jpg",
+                            description:"A curious goldfish princess dreams of becoming human after meeting a young boy. Their friendship sets off a magical adventure by the sea."
+                        },
+                        {
+                            id:"kiki",
+                            title:"Kiki's Delivery Service",
+                            japanese:"魔女の宅急便",
+                            year:1989,
+                            runtime:"102 min",
+                            genre:"Fantasy · Coming-of-Age",
+                            image:"Kiki’s Delivery Service.jpg",
+                            description:"A young witch leaves home to begin her training and starts a flying delivery service while learning independence, confidence, and friendship."
+                        },
+                        {
+                            id:"mononoke",
+                            title:"Princess Mononoke",
+                            japanese:"もののけ姫",
+                            year:1997,
+                            runtime:"134 min",
+                            genre:"Fantasy · Adventure",
+                            image:"Princess Mononoke.jpg",
+                            description:"Caught between the forces of industry and nature, a young warrior becomes involved in a struggle that will determine the future of both worlds."
+                        },
+                        {
+                            id:"castle-in-the-sky",
+                            title:"Castle in the Sky",
+                            japanese:"天空の城ラピュタ",
+                            year:1986,
+                            runtime:"124 min",
+                            genre:"Fantasy · Adventure",
+                            image:"Castle in the Sky.jpg",
+                            description:"Two young friends search for the legendary floating city of Laputa while evading pirates and government agents."
+                        },
+                        {
+                            id:"wind-rises",
+                            title:"The Wind Rises",
+                            japanese:"風立ちぬ",
+                            year:2013,
+                            runtime:"126 min",
+                            genre:"Historical · Drama",
+                            image:"The wind rises.jpg",
+                            description:"Inspired by true events, the story follows aircraft designer Jiro Horikoshi as he pursues his dream of creating beautiful airplanes."
+                        },
+                        {
+                            id:"nausicaa",
+                            title:"Nausicaä of the Valley of the Wind",
+                            japanese:"風の谷のナウシカ",
+                            year:1984,
+                            runtime:"117 min",
+                            genre:"Fantasy · Science Fiction",
+                            image:"Nausicaä.jpg",
+                            description:"In a world threatened by toxic forests and giant insects, Princess Nausicaä strives to bring peace between humanity and nature."
+                        }
+                    ]
+                }
+            }
+        })
