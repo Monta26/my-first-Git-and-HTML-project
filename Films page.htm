@@ -7,7 +7,7 @@
     <title>Studio Ghibli Animation</title>
     <link rel="stylesheet" href ="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script 
-        scr="https://unpkg.com/vue@3/dist/vue.global.js">
+        src="https://unpkg.com/vue@3/dist/vue.global.js">
     </script>
 
     <style>
@@ -107,27 +107,34 @@
 
         .featured-film{
             display:flex;
-            align-items: center;
+            align-items:stretch;
             justify-content: center;
-            width:85%;
+            width:90%;
             margin: 100px auto;
             border-radius:20px;
             background-color:rgb(45, 93, 53);
             box-shadow:0 10px 30px rgba(0,0,0,0.2);
             overflow:hidden;
         }
-
-        .featured-film img{
-            width:55%;
-            height: 700px;
+        .featured-image{
+            position:relative;
+            width:45%;
+            flex-shrink:0;
+        }
+        .featured-image img{
+            position:absolute;
+            inset:0;
+            width:100%;
+            height: 100%;
             object-fit: cover;
-            display: block;
+            object-position:center;
             border-radius:20px;
+            display:block;
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
         .featured-content{
-            width: 45%;
-            padding: 60px;
+            width: 55%;
+            padding: 35px 40px;
             display:flex;
             flex-direction:column;
             justify-content:center;
@@ -136,27 +143,133 @@
         .featured-label{
             color:rgb(212, 217, 200);
             text-transform:uppercase;
-            letter-spacing:1px;
             margin-bottom: 5px;
-            font-size: 15px;
+            font-size: 13px;
         }
         .featured-content h2{
-            font-size: 50px;
-            margin-bottom: 15px;
+            font-size: 30px;
+            margin:5px 0 10px;
             text-align: left;
         }
         .featured-content p{
             color:rgb(219, 228, 216);
-            line-height:1.8;
+            line-height:1.6;
+            font-size:16px;
             text-align: left;
+            margin:6px 0;
         }
         .explore-btn{
+            align-self:flex-start;
+            margin-top:15px;
             background-color:#4f7d52;
             color:white;
             border:none;
-            padding: 10px 20px;
-            font-size: 20px;
+            padding: 10px 22px;
+            font-size: 18px;
             border-radius:30px;
+            cursor:pointer;;
+            transition:background 0.2s ease;
+        }
+        .explore-btn:hover{
+            background-color:#3a6c45;
+        }
+        .films-grid{
+            width:100%;
+            margin:60px auto;
+            display:grid;
+            grid-template-columns:
+                repeat(auto-fit,minmax(250px,1fr));
+            gap: 20px;
+        }
+        .film-card{
+            background:#3a6c45;
+            border-radius:20px;
+            overflow:hidden;
+            cursor:pointer;
+            transition:0.3s ease;
+        }
+        .film-card:hover{
+            transform:translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+        }
+        .film-card img{
+            width:100%;
+            height:170px;
+            object-fit:cover;
+            display:block;
+        }
+        .film-card-content{
+            padding:15px;
+        }
+        .film-card-content h3{
+            color:rgb(255, 255, 255);
+
+            margin:0 0 8px;
+
+            font-size:1.1rem;
+        }
+        .genre{
+            color:rgb(255, 255, 255);
+            font-size:13px;
+            text-align:left;
+        }
+        .year{
+            color:rgb(255, 255, 255);
+            font-size:13px;
+            opacity:0.7;
+            text-align:left;
+            margin:4 0px;
+        }
+        .overlay{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,0.5);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            z-index:999;
+        }
+        .popup-card{
+            width:80%;
+            max-width:1200px;
+            background:#3a6c45;
+            border-radius:20px;
+            overflow:hidden;
+            display:flex;
+            position:relative;
+        }
+        .popup-card img{
+            width:50%;
+            height:500px;
+            object-fit:cover;
+        }
+        .popup-content{
+            width:50%;
+            padding:50px;
+            color:rgb(245, 245, 245);
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            text-align:left;
+        }
+        .popup-content p{
+            text-align:left;
+        }
+        .popup-content h2{
+            text-align:left;
+        }
+        .close-btn{
+            position:absolute;
+            top:20px;
+            right:20px;
+            border:none;
+            background:none;
+            color:rgb(245, 245, 245);
+            font-size:2rem;
+            cursor:pointer;
         }
         h1{
         margin-top:0;
@@ -198,7 +311,65 @@
         border: none;
         border-top:4px dotted;
        }
-    
+    @media (max-width: 900px) {
+        #navbar {
+            flex-wrap: wrap;
+            justify-content:center;
+        }
+        #search-box,
+        #search-input{
+            width:100%;
+            max-width:300px;
+            margin:10px 0;
+        }
+        .featured-film{
+            flex-direction:column;
+            width:90%;
+        }
+        .featured-image{
+            width:100%;
+            height:250px;
+        }
+        .featured-content{
+            width:100%;
+            padding:25px;
+        }
+        .explore-btn{
+            padding: 5px 5px;
+            font-size: 15px;
+        }
+        .popup-card{
+            flex-direction:column;
+            width:95%;
+            max-height:90vh; /*never taller than the screen*/
+            overflow-y:auto; /*scrolls inside the card if needed*/
+        }
+
+        .popup-card img{
+            width:100%;
+            height:220px;
+            flex-shrink:0; /*stops the image from being squashed*/
+        }
+
+        .popup-content{
+            width:100%;
+            padding:25px;
+        }
+        .popup-content p{
+            font-size:16px;
+        }
+        .popup-content h2{
+            font-size:1.8rem;
+        }
+        .clos-btn{
+            background:rgba(0,0,0,0.5);
+            border-radius:50%;
+            width:40px;
+            height:40px;
+            font-size:1.2rem;
+            z-index:2;
+        }
+    }
     @media (max-width: 1400px) {
         h1 {
             font-size: 3rem;
@@ -221,28 +392,7 @@
                     transparent 30%,
                     rgb(23, 57, 28) 100%
                 );
-            }
-            #navbar {
-                flex-wrap: wrap;
-                justify-content:center;
-            }
-            #search-box,
-            #search-input{
-                width:100%;
-                max-width:300px;
-                margin:10px 0;
-            }
-            .featured-film {
-                flex-direction: column;
-            }
-            .featured-film img{
-                width:100%;
-                height:auto;
-            }
-
-            .featured-content{
-                width:100%;
-            }
+        }
     }
     </style>
 </head>
@@ -263,24 +413,91 @@
         <h1> A world in every story</h1>
         <p>From quiet country lanes to castles in the clouds. Find a film to get lost in.</p>
     </section>
-    <section class="featured-film">
-        <img src="Arrietty (2).jpg" alt="Arrietty">
-        <div class="featured-content">
-            <p class="featured-label">in the spotlight</p>
-            <h2>Arrietty</h2>
-            <p class="featured-label">借りぐらしのアリエッティ · Karigurashi no Arrietti</p>
-            <p>2010  /  94 min  /  Fantasy · Adventure</p>
-            <P>
-                Hidden beneath the floorboards of an ordinary house,
-                a tiny borrower named Arrietty lives with her family in
-                secret. When an unexpected friendship forms with a human
-                boy, her quiet world begins to change forever.
-            </P>
-            <p class="featured-label">Directed by Hiromasa Yonebayashi</p>
-            <button class="explore-btn">Explore Film →</button>
-        </div>
-    </section>
-    <section class="films-grid">
+    <div id="app">
+        <section class="featured-film">
+            <div class="featured-image">
+                <img src="Arrietty (2).jpg" alt="Arrietty">
+            </div>
+            <div class="featured-content">
+                <p class="featured-label">in the spotlight</p>
+                <h2>Arrietty</h2>
+                <p class="featured-label">借りぐらしのアリエッティ · Karigurashi no Arrietti</p>
+                <p>2010  /  94 min  /  Fantasy · Adventure</p>
+                <P>
+                    Hidden beneath the floorboards of an ordinary house,
+                    a tiny borrower named Arrietty lives with her family in
+                    secret. When an unexpected friendship forms with a human
+                    boy, her quiet world begins to change forever.
+                </P>
+                <p class="featured-label">Directed by Hiromasa Yonebayashi</p>
+                <button class="explore-btn" @click="openFilm('arrietty')">Explore Film →</button>
+            </div>
+        </section>
+        <section class="films-grid">
+            <div
+                class="film-card"
+                v-for="film in films"
+                :key="film.id"
+                @click="selectedFilm = film"
+            >   
+
+                <img :src="film.image" :alt="film.title">
+
+                <div class="film-card-content">
+                    <h3>{{ film.title }}</h3>
+                    <p class="genre">
+                        {{ film.genre }}
+                    </p>
+                    <p class="year">
+                        {{ film.year }}
+                    </p>
+                </div>
+            </div>
+            <div 
+                class="overlay"
+                v-if="selectedFilm"
+                @click="selectedFilm = null"
+            >
+            <div
+                class="popup-card"
+                @click.stop
+            >
+
+                    <button
+                        class="close-btn"
+                        @click="selectedFilm = null"
+                    > ✕
+                    </button>
+                    <img
+                        :src="selectedFilm.image"
+                        :alt="selectedFilm.title"
+                    >
+                    <div class="popup-content">
+                        <p class="featured-label">
+                            Film details
+                        </p>
+                        <h2>
+                            {{ selectedFilm.title }}
+                        </h2>
+                        <p class="japanese-title">
+                            {{ selectedFilm.japanese }}
+                        </p>
+                        <p class="film-meta">
+                            {{ selectedFilm.year }}
+                            .
+                            {{ selectedFilm.runtime }}
+                            .
+                            {{ selectedFilm.genre }}
+                        </p>
+                        <p>
+                            {{ selectedFilm.description }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
 
     
     <script>
@@ -308,7 +525,7 @@
                            year:2001,
                            runtime:"125 min",
                            genre:"Fantasy · Adventure",
-                           image:"Spirited_Away.jpg",
+                           image:"Spirited Away.jpg",
                            description:"After entering a mysterious spirit world, Chihiro must work in a magical bathhouse to save her parents and find her way home." 
                         },
                         {
@@ -318,7 +535,7 @@
                             year:2004,
                             runtime:"119 min",
                             genre:"Fantasy · Romance",
-                            image:"Howls_Moving_Castle.jpg",
+                            image:"Howl's Moving Castle.jpg",
                             description:"A young woman cursed by a witch finds refuge in a magical moving castle and embarks on a journey filled with love, magic, and adventure."
                         },
                         {
@@ -338,7 +555,7 @@
                             year:1989,
                             runtime:"102 min",
                             genre:"Fantasy · Coming-of-Age",
-                            image:"Kiki’s Delivery Service.jpg",
+                            image:"Kiki's Delivery Service.jpg",
                             description:"A young witch leaves home to begin her training and starts a flying delivery service while learning independence, confidence, and friendship."
                         },
                         {
@@ -380,8 +597,25 @@
                             genre:"Fantasy · Science Fiction",
                             image:"Nausicaä.jpg",
                             description:"In a world threatened by toxic forests and giant insects, Princess Nausicaä strives to bring peace between humanity and nature."
-                        }
+                        },
+                        {
+                            id:"arrietty",
+                            title:"Arrietty",
+                            japanese:"借りぐらしのアリエッティ",
+                            year:2010,
+                            runtime:"94 min",
+                            genre:"Fantasy · Adventure",
+                            image:"Arrietty (2).jpg",
+                            description:"Hidden beneath the floorboards of an ordinary house, a tiny borrower named Arrietty lives with her family in secret. When an unexpected friendship forms with a human boy, her quiet world begins to change forever."
+                        }                       
                     ]
                 }
+            },
+            methods:{
+                openFilm(id){
+                    this.selectedFilm=this.films.find(f => f.id ==id);
+                }
             }
-        })
+        }).mount("#app");
+    </script>
+</body>
